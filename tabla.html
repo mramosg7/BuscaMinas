@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>Buscaminas</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin: 0 auto;
+            background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+        }
+        #container {
+            padding: 20px;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            width: 250px;
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(5, 1fr);
+        }
+        #container > div {
+            background-color: #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #container > div:hover {
+            background-color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Buscaminas</h1>
+    <div id="container"></div>
+    <script>
+        
+        let gridSize = 5;
+        let bombs = 5;
+        let tiles = [];
+        let bombLocations = [];
+ 
+        //Crear el tablero
+        for (let i = 0; i < gridSize * gridSize; i++) {
+            let div = document.createElement('div');
+            
+            div.addEventListener('click', ()=>prueba(this));
+            document.querySelector('#container').appendChild(div);
+        }
+ 
+        //Añadir bombas
+        for (let i = 0; i < bombs; i++) {
+            let randomIndex = Math.floor(Math.random() * (gridSize * gridSize));
+            if (bombLocations.indexOf(randomIndex) === -1) {
+                bombLocations.push(randomIndex);
+                tiles[randomIndex].classList.add('bomb');
+            } else {
+                i--;
+            }
+        }
+        function prueba(e){
+            document.querySelector('h1').style.backgroundColor="red"        }
+        //Juego
+        function tileClicked(e) {
+            let tile = e.target;
+            if (tile.classList.contains('bomb')) {
+                alert('¡Game Over!');
+            } else {
+                let totalBombs = 0;
+                let index = tiles.indexOf(tile);
+                let row = Math.floor(index / gridSize);
+                let col = index % gridSize;
+ 
+                //Comprobar los alrededores
+                for (let i = -1; i <= 1; i++) {
+                    for (let j = -1; j <= 1; j++) {
+                        let checkRow = row + i;
+                        let checkCol = col + j;
+                        if (checkRow >= 0 && checkRow < gridSize && checkCol >= 0 && checkCol < gridSize) {
+                            let checkIndex = checkRow * gridSize + checkCol;
+                            if (bombLocations.indexOf(checkIndex) !== -1) {
+                                totalBombs++;
+                            }
+                        }
+                    }
+                }
+ 
+                //Cambiar el color
+                tile.innerHTML = totalBombs;
+                tile.style.backgroundColor = '#999';
+            }
+        }
+    </script>
+</body>
+</html>

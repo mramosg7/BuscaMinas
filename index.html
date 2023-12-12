@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Buscaminas</title>
+</head>
+<body oncontextmenu="return false;">
+    <div class="main">
+        <h1>Buscaminas</h1>
+        <a onclick="iniciarjuego()" class="fancy" href="#">
+            <span class="top-key"></span>
+            <span class="text">JUGAR</span>
+            <span class="bottom-key-1"></span>
+            <span class="bottom-key-2"></span>
+        </a>
+    </div>
+    <div class="background-before">
+        <div class="background-game">
+            <div class="inidice">
+                <div class="flag">
+                    <p>🚩</p>
+                    <p id="banderas">10</p>
+                </div>
+                <div class="timer">
+                    <p>🕧</p>
+                    <p id="setTimer">0</p>
+                </div>
+                
+            </div>
+            
+        
+            <div id="container">
+
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+<script src="script.js"></script>
+</html>
